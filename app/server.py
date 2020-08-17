@@ -11,7 +11,7 @@ import uvicorn, aiohttp, asyncio
 import base64, sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'YOUR MODEL.h5 DIRECT / RAW DOWNLOAD URL HERE!'
+model_file_url = 'https://drive.google.com/file/d/1Y2YJ0EGhUM9QN9SduJoq7ew9Ly5E2ba0/view?usp=sharing'
 model_file_name = 'model'
 
 app = Starlette()
