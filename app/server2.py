@@ -5,7 +5,6 @@ import tensorflow as tf
 from keras.layers import Dense, Dropout, Activation, Flatten, Conv2D, MaxPooling2D, Lambda, MaxPool2D, BatchNormalization
 from keras.utils import np_utils
 from keras.utils import model_to_dot
-from tensorflow.keras.utils import plot_model
 from keras.utils.np_utils import to_categorical
 from keras.preprocessing.image import ImageDataGenerator
 from keras import models, layers, optimizers
@@ -21,7 +20,6 @@ from keras import backend as K
 from keras.applications.vgg16 import VGG16
 from keras.models import Model
 from keras.applications.inception_v3 import InceptionV3
-from keras.applications.resnet50 import ResNet50
 import os
 from glob import glob
 import matplotlib.pyplot as plt
@@ -46,6 +44,7 @@ from sklearn.utils import class_weight
 from sklearn.metrics import confusion_matrix
 from imblearn.over_sampling import RandomOverSampler
 from imblearn.under_sampling import RandomUnderSampler
+from keras.applications.inception_v3 import decode_predictions
 
 
 
@@ -55,10 +54,6 @@ from imblearn.under_sampling import RandomUnderSampler
 
 
 
-from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
-from tensorflow.keras.applications.resnet50 import ResNet50
 from starlette.applications import Starlette
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
