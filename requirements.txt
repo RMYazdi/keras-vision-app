@@ -2,7 +2,8 @@ tensorflow-gpu==2.3.0
 Keras
 sklearn
 gevent
-pillow
+cv2
+pandas 
 numpy
 h5py
 starlette
