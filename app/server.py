@@ -63,7 +63,7 @@ import uvicorn, aiohttp, asyncio
 import sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://drive.google.com/uc?export=download&id=131wCYljVuQxuV3pjHtKSp3CdjWbmDDmh'
+model_file_url = 'https://drive.google.com/uc?export=download&id=1-4D7hdrEEiKsnj1gjr99XVhqgfwBm4y8'
 model_file_name = 'model'
 
 app = Starlette()
@@ -239,38 +239,38 @@ async def upload(request):
 
 
 
-def model_predict(img_path, model):
-    result = [];     
-    
-    img = cv2.imread(img_path)
-    img = skimage.transform.resize(img, (224, 224))
-    img_file=img/255.0
-    x = np.asarray(img_file)
-    
-    y_pred = model.predict(x)
-    predictions = decode_predictions(y_pred, top=2)[0] # Get Top-2 Accuracy
-
-    for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
-    result_html1 = path/'static'/'result1.html'
-    result_html2 = path/'static'/'result2.html'
-    result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
-    return HTMLResponse(result_html)
-
-
-
-
-
-
-
 # def model_predict(img_path, model):
-#     result = []; img = image.load_img(img_path, target_size=(224, 224))
-#     x = preprocess_input(np.expand_dims(image.img_to_array(img), axis=0))
-#     predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
+#     result = [];     
+    
+#     img = cv2.imread(img_path)
+#     img = skimage.transform.resize(img, (224, 224))
+#     img_file=img/255.0
+#     x = np.asarray(img_file)
+    
+#     y_pred = model.predict(x)
+#     predictions = decode_predictions(y_pred, top=2)[0] # Get Top-2 Accuracy
+
 #     for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
 #     result_html1 = path/'static'/'result1.html'
 #     result_html2 = path/'static'/'result2.html'
 #     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
 #     return HTMLResponse(result_html)
+
+
+
+
+
+
+
+def model_predict(img_path, model):
+    result = []; img = image.load_img(img_path, target_size=(224, 224))
+    x = preprocess_input(np.expand_dims(image.img_to_array(img), axis=0))
+    predictions = decode_predictions(model.predict(x), top=3)[0] # Get Top-3 Accuracy
+    for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
+    result_html1 = path/'static'/'result1.html'
+    result_html2 = path/'static'/'result2.html'
+    result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
+    return HTMLResponse(result_html)
 
 @app.route("/")
 def form(request):
