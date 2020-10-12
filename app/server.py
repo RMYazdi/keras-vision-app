@@ -2,6 +2,7 @@ from keras.applications.imagenet_utils import preprocess_input, decode_predictio
 from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.resnet50 import ResNet50
+
 from starlette.applications import Starlette
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
@@ -33,7 +34,7 @@ async def setup_model():
     # await download_file(model_file_url, MODEL_PATH)
     # model = load_model(MODEL_PATH) # Load your Custom trained model
     # model._make_predict_function()
-    model = ResNet50(weights='imagenet') # COMMENT, IF you have Custom trained model
+#     model = ResNet50(weights='imagenet') # COMMENT, IF you have Custom trained model
     return model
 
 # Asynchronous Steps
