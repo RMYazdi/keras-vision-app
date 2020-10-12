@@ -1,18 +1,17 @@
-from keras.applications.imagenet_utils import preprocess_input, decode_predictions
-from keras.models import load_model
-from keras.preprocessing import image
-from keras.applications.resnet50 import ResNet50
-
+from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import ResNet50
 from starlette.applications import Starlette
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
 from pathlib import Path
 import uvicorn, aiohttp, asyncio
-import base64, sys, numpy as np
+import sys, numpy as np
 
 path = Path(__file__).parent
-model_file_url = 'https://drive.google.com/file/d/1-0hzZTVhBcC5Del4eSsmbr4ptCYAvZEH/view?usp=sharing'
+model_file_url = 'YOUR MODEL.h5 DIRECT / RAW DOWNLOAD URL HERE!'
 model_file_name = 'model'
 
 app = Starlette()
@@ -34,7 +33,7 @@ async def setup_model():
     # await download_file(model_file_url, MODEL_PATH)
     # model = load_model(MODEL_PATH) # Load your Custom trained model
     # model._make_predict_function()
-#     model = ResNet50(weights='imagenet') # COMMENT, IF you have Custom trained model
+    model = ResNet50(weights='imagenet') # COMMENT, IF you have Custom trained model
     return model
 
 # Asynchronous Steps
@@ -46,9 +45,8 @@ loop.close()
 @app.route("/upload", methods=["POST"])
 async def upload(request):
     data = await request.form()
-    img_bytes = await (data["img"].read())
-    bytes = base64.b64decode(img_bytes)
-    with open(IMG_FILE_SRC, 'wb') as f: f.write(bytes)
+    img_bytes = await (data["file"].read())
+    with open(IMG_FILE_SRC, 'wb') as f: f.write(img_bytes)
     return model_predict(IMG_FILE_SRC, model)
 
 def model_predict(img_path, model):
