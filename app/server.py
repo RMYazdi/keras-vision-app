@@ -26,16 +26,11 @@ import random
 import cv2
 import pandas as pd
 import numpy as np
-import seaborn as sns
-import zlib
 import itertools
 import sklearn
-import itertools
 import scipy
 import skimage
 from skimage.transform import resize
-import csv
-from tqdm import tqdm
 from sklearn import model_selection
 from sklearn.model_selection import train_test_split, learning_curve,KFold,cross_val_score,StratifiedKFold
 from sklearn.utils import class_weight
