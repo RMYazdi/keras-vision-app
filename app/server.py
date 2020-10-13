@@ -35,8 +35,6 @@ from sklearn import model_selection
 from sklearn.model_selection import train_test_split, learning_curve,KFold,cross_val_score,StratifiedKFold
 from sklearn.utils import class_weight
 from sklearn.metrics import confusion_matrix
-from imblearn.over_sampling import RandomOverSampler
-from imblearn.under_sampling import RandomUnderSampler
 from keras.applications.inception_v3 import decode_predictions
 
 
