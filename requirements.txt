@@ -2,7 +2,7 @@ tensorflow-gpu==2.3.0
 Keras
 sklearn
 gevent
-cv2
+opencv-python
 pandas 
 numpy
 h5py
