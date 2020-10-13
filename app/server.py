@@ -224,11 +224,15 @@ def model_predict(img_path, model):
     img = skimage.transform.resize(img, (224, 224))
     img_file=img/255.0
     x = np.asarray(img_file)
-    
+    x=x.reshape((1,224,224,3))
     y_pred = model.predict(x)
-    predictions = decode_predictions(y_pred, top=2)[0] # Get Top-2 Accuracy
-
-    for p in predictions: _,label,accuracy = p; result.append((label,accuracy))
+    
+    
+    Label_dict={0:"Patient",1:"Normal"}
+    label=Label_dict[np.argmax(y_pred, axis=1)[0]]
+    accuracy=max(y_pred[0])
+    
+    result.append((label,accuracy))
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
