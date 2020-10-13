@@ -109,7 +109,7 @@ from keras.models import Model
 from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
 
-def Model_build_Inception():
+def Model_build():
 
   base_model = InceptionV3(include_top=False, weights='imagenet')
   # Training only top layers i.e. the layers which we have added in the end
