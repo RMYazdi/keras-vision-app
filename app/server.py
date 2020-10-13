@@ -79,6 +79,25 @@ IMG_FILE_SRC = '/tmp/saved_image.png'
 
 
 
+# Defining Hyperparameters and model structure
+image_size=224
+target_dims = (image_size,image_size,3) # add channel for RGB
+number_classes = 2
+number_epoch=150
+batch_size=32
+learningRate=0.0001
+patience=100
+# optimizer = keras.optimizers.Adam(lr=0.001)
+optimizer = keras.optimizers.RMSprop(lr=learningRate)
+
+
+
+
+
+
+
+
+
 #Generate Model 
 
 from keras.applications.inception_v3 import InceptionV3
