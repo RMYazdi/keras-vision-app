@@ -98,7 +98,7 @@ optimizer = keras.optimizers.RMSprop(lr=learningRate)
 
 
 
-#Generate Model 
+#Generare Model
 
 from keras.applications.inception_v3 import InceptionV3
 from keras.applications.vgg16 import VGG16
@@ -109,65 +109,32 @@ from keras.models import Model
 from keras.optimizers import SGD
 from keras.preprocessing.image import ImageDataGenerator
 
-def Model_build():
-  # Importing the important libraries
+def Model_build_Inception():
 
-  def single_branch(name_modifier):#add name_modifier cause we use a single model(like InceptionV3) mutilple times. 
-    
-    base_model = InceptionV3(include_top=False, weights='imagenet')
-    for layer in base_model.layers:
+  base_model = InceptionV3(include_top=False, weights='imagenet')
+  # Training only top layers i.e. the layers which we have added in the end
+  for layer in base_model.layers:
       layer.trainable = True
-    
-    for layer in base_model.layers:
-      layer._name = layer.name + str(name_modifier)
+  
+  # Taking the output of the last convolution block in InceptionV3
+  x = base_model.output
+  
+  # Adding a Global Average Pooling layer
+  x = GlobalAveragePooling2D()(x)
 
 
-    x = base_model.output
-    
-    x = GlobalAveragePooling2D()(x)
 
-    # x = Dense(1024, activation='relu')(x)
-
-    # predictions = Dense(number_classes, activation='softmax')(x)
-
-    model = Model(inputs=base_model.input, outputs=x)
+  # Adding a fully connected layer having 2 neurons which will
+  # give the probability of image having either dog or cat
+  predictions = Dense(2, activation='softmax')(x)
+  
+  # Model to be trained
+  model = Model(inputs=base_model.input, outputs=predictions)
     
     # Training only top layers i.e. the layers which we have added in the end
-    return model
-
-
-
-
-
-
-  Frontal_branch=single_branch('one')
-  Lateral_branch=single_branch('two')
-  Oblique_branch=single_branch('three')
-
-
-
-  # plot_model(Oblique_branch)
-
-
-  combinedInput = concatenate([Frontal_branch.output, Lateral_branch.output,Oblique_branch.output])
-
-  predictions = Dense(number_classes, activation='softmax',name='visualize_layer')(combinedInput)
-
-
-
-  model=Model(inputs=[Frontal_branch.input,Lateral_branch.input,Oblique_branch.input],outputs=predictions)
   return model
 
-# model.summary()
 
-# plot_model(model)
-
-
-
-
-
-
-  # model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=["accuracy"])
   
 
 
