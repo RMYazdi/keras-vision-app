@@ -16,6 +16,7 @@ from keras.models import Sequential, model_from_json
 from keras.layers import Activation,Dense, Dropout, Flatten, Conv2D, MaxPool2D,MaxPooling2D,AveragePooling2D, BatchNormalization
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
+from keras.layers.merge import concatenate
 from keras import backend as K
 from keras.applications.vgg16 import VGG16
 from keras.models import Model
