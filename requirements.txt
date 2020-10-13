@@ -1,7 +1,7 @@
 tensorflow-gpu==2.3.0
 Keras
 sklearn
-skimage
+scikit-image
 gevent
 opencv-python-headless
 pandas 
