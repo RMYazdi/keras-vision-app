@@ -234,7 +234,7 @@ def model_predict(img_path, model):
     accuracy=max(y_pred[0])
     
     result.append((label,accuracy))
-    result_report="Status= {}\n   Accuracy= {:.2f}".format(label,accuracy*100)
+    result_report="Status= {},\n      Accuracy= {:.2f}".format(label,accuracy*100)
     
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
