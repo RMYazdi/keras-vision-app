@@ -217,6 +217,7 @@ async def upload(request):
 
 
 
+
 def model_predict(img_path, model):
     result = [];     
     
@@ -233,9 +234,13 @@ def model_predict(img_path, model):
     accuracy=max(y_pred[0])
     
     result.append((label,accuracy))
+    result_report=" Result: {} with {:.2f} accuracy".format(label,accuracy)
+    
     result_html1 = path/'static'/'result1.html'
     result_html2 = path/'static'/'result2.html'
-    result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
+#     result_html = str(result_html1.open().read() +str(result) + result_html2.open().read())
+    result_html = str(result_html1.open().read() + result_report + result_html2.open().read())
+
     return HTMLResponse(result_html)
 
 
