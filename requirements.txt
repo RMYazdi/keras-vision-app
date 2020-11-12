@@ -7,7 +7,6 @@ gevent
 opencv-python-headless
 pandas 
 numpy
-h5py
 starlette
 uvicorn
 python-multipart
